@@ -30,14 +30,14 @@ const SearchInput: FC<{
       }}
       render={({ field }) => (
         <FormItem className="mt-2">
-          <Label>{label}</Label>
+          <Label>Select {label}</Label>
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 variant="outline"
                 role="combobox"
                 aria-expanded={field.value ? "true" : "false"}
-                className="w-full justify-between"
+                className="w-full justify-between bg-[#10101F] border-[#4D4D6B] px-4 py-6 rounded-xl"
               >
                 {field.value
                   ? data.find((item) => item.value === field.value)?.label
