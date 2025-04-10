@@ -222,7 +222,6 @@ const RegisterPage = () => {
           <img src={LockKeyholeIcon} alt="lock keyhole" />
         )}
       </div>
-
       {step === 2 && (
         <div className="flex items-center gap-2">
           <img src={LockIcon} alt="lock" />
@@ -233,7 +232,6 @@ const RegisterPage = () => {
           </p>
         </div>
       )}
-
       {step === 3 && (
         <>
           <div className="flex items-center gap-4">
@@ -251,7 +249,6 @@ const RegisterPage = () => {
           </div>
         </>
       )}
-
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           {step === 1 && <StepOne />}
