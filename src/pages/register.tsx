@@ -26,7 +26,7 @@ import logo from "../assets/stratmatex-logo.png";
 const RegisterPage = () => {
   const form = useForm();
   const navigate = useNavigate();
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(1);
   const errorMessage = (res: Record<string, string>): void => {
     Object.keys(res).forEach((errorKey) => {
       toast.warning(`${res[errorKey]}`, {
