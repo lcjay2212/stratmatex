@@ -181,7 +181,7 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className="text-white text-start mx-auto w-full md:w-[400px]">
+    <div className="text-white text-start mx-auto w-full md:w-[400px] my-12 px-4 md:px-0">
       <div className="flex flex-col items-center">
         <img src={logo} alt="logo" className="w-[200px]" />
       </div>

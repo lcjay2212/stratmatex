@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white text-sm px-8 pt-6 pb-12 border-t border-orange-500">
+    <footer className="bg-black text-white text-sm px-8 pt-6 pb-12 border-t border-primary">
       <div className="max-w-7xl mx-auto space-y-12">
         {/* Top Text */}
         <p className="text-gray-300 text-start leading-relaxed mt-4">
@@ -19,7 +19,7 @@ const Footer = () => {
             © Strategic Material Exchange™ All rights reserved.
           </p>
 
-          <div className="flex flex-wrap gap-x-4 gap-y-2 text-orange-500">
+          <div className="flex flex-wrap gap-x-4 gap-y-2 text-primary">
             <Link to="/privacy-policy" className="hover:underline">
               Privacy Policy
             </Link>
