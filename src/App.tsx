@@ -3,6 +3,7 @@ import "./App.css";
 import Footer from "./components/Footer";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages";
+import AboutPage from "./pages/about";
 import ContactPage from "./pages/contact";
 import RegisterPage from "./pages/register";
 
@@ -19,6 +20,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/about" element={<AboutPage />} />
         </Routes>
       </main>
       {shouldHideNavbar && <Footer />}
