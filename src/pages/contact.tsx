@@ -132,7 +132,7 @@ const ContactPage = () => {
                 }}
                 render={({ field }) => (
                   <FormItem className="mt-2">
-                    <Label>Email</Label>
+                    <Label>Subject</Label>
                     <FormControl>
                       <Input
                         type="text"

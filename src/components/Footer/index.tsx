@@ -9,8 +9,8 @@ const Footer = () => {
           Strategic Material Exchange™ is a registered trademark. This website
           utilizes the patented encryption technology
           <br />
-          from QLIX Technologies, Inc. QLIX® is a registered trademark of QLIX
-          Technologies, Inc.
+          from QUX Technologies, Inc.™ QUX® is a registered trademark of QUX
+          Technologies, Inc.™
         </p>
 
         {/* Bottom Row */}
@@ -20,15 +20,27 @@ const Footer = () => {
           </p>
 
           <div className="flex flex-wrap gap-x-4 gap-y-2 text-primary">
-            <Link to="/privacy-policy" className="hover:underline">
+            <Link
+              to="https://qux.tv/privacy-policy"
+              target="blank"
+              className="hover:underline"
+            >
               Privacy Policy
             </Link>
             <span>|</span>
-            <Link to="/terms" className="hover:underline">
+            <Link
+              to="https://qux.tv/terms-and-condition"
+              target="blank"
+              className="hover:underline"
+            >
               Terms & Agreement
             </Link>
             <span>|</span>
-            <Link to="/faqs" className="hover:underline">
+            <Link
+              to="https://quxpay.com/faqs"
+              target="blank"
+              className="hover:underline"
+            >
               FAQs
             </Link>
             <span>|</span>
