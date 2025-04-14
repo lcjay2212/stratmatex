@@ -19,13 +19,13 @@ const HomePage = () => {
       <div
         className={`bg-[url(./assets/images/home-image.jpg)] bg-cover bg-center h-screen`}
       >
-        <div className="text-start flex justify-evenly items-center gap-24 h-screen">
-          <p className="text-white text-[48px] font-bold">
+        <div className="text-center md:text-start flex flex-col md:flex-row justify-center md:justify-evenly items-center gap-4 md:gap-24 h-screen">
+          <p className="text-white text-2xl md:text-[48px] font-bold">
             America's critical and rare
             <br /> materials, ready when you are.
           </p>
           <div>
-            <p className="text-lg/8">
+            <p className="text-sm md:text-lg/8">
               The complete source for US-made
               <br /> rare earth elements and critical
               <br />
