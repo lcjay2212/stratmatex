@@ -5,5 +5,15 @@ import Four from "./4.png";
 import Five from "./5.png";
 import AboutUsImageOne from "./Intersection 1.png";
 import AboutUsImageTwo from "./about-us.png";
+import GraphImage from "./graph.png";
 
-export { AboutUsImageOne, AboutUsImageTwo, Five, Four, One, Three, Two };
+export {
+  AboutUsImageOne,
+  AboutUsImageTwo,
+  Five,
+  Four,
+  GraphImage,
+  One,
+  Three,
+  Two,
+};
