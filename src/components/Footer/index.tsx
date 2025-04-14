@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white text-sm px-8 pt-6 pb-12 border-t border-primary">
-      <div className="max-w-7xl mx-auto space-y-12">
+    <footer className="bg-black text-white text-sm px-8 pt-6 pb-12 border-t border-primary md:py-24">
+      <div className="max-w-7xl mx-auto space-y-12 md:space-y-24">
         {/* Top Text */}
-        <p className="text-gray-300 text-start leading-relaxed mt-4">
+        <p className="text-gray-300 text-center md:text-start font-semibold leading-relaxed">
           Strategic Material Exchange™ is a registered trademark. This website
           utilizes the patented encryption technology
           <br />
@@ -15,7 +15,7 @@ const Footer = () => {
 
         {/* Bottom Row */}
         <div className="flex flex-col md:flex-row justify-between items-center text-gray-400">
-          <p className="mb-4 md:mb-0">
+          <p className="mb-4 md:mb-0 font-semibold ">
             © Strategic Material Exchange™ All rights reserved.
           </p>
 
