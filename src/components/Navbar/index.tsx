@@ -8,12 +8,12 @@ const Navbar = () => (
         <img src={Logo} alt="Logo" className="h-12 w-auto" />
       </div>
 
-      <ul className="flex gap-8 text-sm">
+      <ul className="flex gap-8 text-[16px]">
         <li>
           <NavLink
             to="/"
             className={({ isActive }) =>
-              isActive ? "text-orange-500 font-medium" : "hover:text-orange-400"
+              isActive ? "text-primary font-medium" : "hover:text-primary"
             }
           >
             Home
@@ -23,7 +23,7 @@ const Navbar = () => (
           <NavLink
             to="/about"
             className={({ isActive }) =>
-              isActive ? "text-orange-500 font-medium" : "hover:text-orange-400"
+              isActive ? "text-primary font-medium" : "hover:text-primary"
             }
           >
             About Us
@@ -33,7 +33,7 @@ const Navbar = () => (
           <NavLink
             to="/contact"
             className={({ isActive }) =>
-              isActive ? "text-orange-500 font-medium" : "hover:text-orange-400"
+              isActive ? "text-primary font-medium" : "hover:text-primary"
             }
           >
             Contact Us
@@ -42,12 +42,12 @@ const Navbar = () => (
       </ul>
 
       <div className="flex gap-4 text-sm">
-        {/* <Link to="/login" className="hover:text-orange-400">
+        {/* <Link to="/login" className="hover:text-primary">
           Login
         </Link> */}
         <Link
           to="/register"
-          className="border border-white rounded-full px-6 py-2 hover:bg-orange-500 hover:border-orange-500 transition"
+          className="border border-white rounded-full px-6 py-2 hover:bg-primary hover:border-primary transition"
         >
           Sign up
         </Link>
