@@ -1,8 +1,10 @@
+import { BlackCheck } from "@/assets/icons";
 import {
   AboutUsImageOne,
   AboutUsImageTwo,
   Five,
   Four,
+  Gold,
   One,
   Three,
   Two,
@@ -57,7 +59,7 @@ const AboutPage = () => {
   ];
 
   return (
-    <div>
+    <div className="mt-32 md:mt-48">
       <div className="max-w-screen-xl mx-auto mt-[5rem] p-4 md:p-0">
         <div className="flex flex-col-reverse md:flex-row justify-between items-center gap-12 mx-12">
           <div className="text-start ">
@@ -116,12 +118,16 @@ const AboutPage = () => {
             <br className="hidden md:block" />
             often plague critical material procurement.
           </p>
+
           <Button
             type="button"
-            className="rounded-full mt-8 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer"
+            className="rounded-full my-4 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer h-auto text-xl p-1"
             onClick={() => navigate("/contact")}
           >
-            Contact Us
+            <span className="ml-4 mr-2"> Contact Us</span>
+            <span>
+              <img src={BlackCheck} className="h-[40px]" />
+            </span>
           </Button>
         </div>
 
@@ -358,12 +364,16 @@ const AboutPage = () => {
         </p>
         <Button
           type="button"
-          className="rounded-full mt-8 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer"
+          className="rounded-full my-4 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer h-auto text-xl p-1"
           onClick={() => navigate("/contact")}
         >
-          Contact Us
+          <span className="ml-4 mr-2"> Contact Us</span>
+          <span>
+            <img src={BlackCheck} className="h-[40px]" />
+          </span>
         </Button>
       </div>
+      <img src={Gold} />
     </div>
   );
 };

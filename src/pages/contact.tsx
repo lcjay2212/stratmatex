@@ -1,3 +1,5 @@
+import { BlackCheck } from "@/assets/icons";
+import { Gold } from "@/assets/images";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -56,8 +58,8 @@ const ContactPage = () => {
     mutate(val);
   };
   return (
-    <div>
-      <div className="flex flex-col md:flex-row justify-between max-w-screen-xl mx-auto mt-[5rem] p-4 md:p-0">
+    <div className="mt-32 md:mt-48">
+      <div className="flex flex-col md:flex-row justify-evenly max-w-screen-xl mx-auto mt-[5rem] p-4 md:p-0">
         <div className="text-start">
           <p className="text-primary text-[18px]">Need Help?</p>
           <div className="my-6">
@@ -165,10 +167,13 @@ const ContactPage = () => {
 
               <Button
                 type="submit"
-                className="rounded-full my-4 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer"
+                className="rounded-full my-4 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer h-auto text-xl p-1"
                 loading={isPending}
               >
-                Submit{" "}
+                <span className="ml-6 mr-4">Submit</span>
+                <span>
+                  <img src={BlackCheck} className="h-[40px]" />
+                </span>
               </Button>
             </form>
           </Form>
@@ -197,6 +202,8 @@ const ContactPage = () => {
           </div>
         </div>
       </div>
+
+      <img src={Gold} />
     </div>
   );
 };

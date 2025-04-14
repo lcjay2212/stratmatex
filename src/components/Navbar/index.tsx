@@ -2,7 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import Logo from "../../assets/stratmatex-logo.png";
 
 const Navbar = () => (
-  <nav className="text-white px-8 py-4 shadow-md">
+  <nav className="bg-black/70 text-white px-8 py-4 shadow-md absolute inset-x-0 top-0">
     <div className="max-w-7xl mx-auto flex justify-between items-center">
       <div className="flex items-center gap-2">
         <img src={Logo} alt="Logo" className="h-12 w-auto" />

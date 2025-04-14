@@ -1,3 +1,4 @@
+import { BlackCheck, WhiteCheck } from "@/assets/icons";
 import { GraphImage } from "@/assets/images";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +16,37 @@ const HomePage = () => {
 
   return (
     <div>
+      <div
+        className={`bg-[url(./assets/images/home-image.jpg)] bg-cover bg-center h-screen`}
+      >
+        <div className="text-start flex justify-evenly items-center gap-24 h-screen">
+          <p className="text-white text-[48px] font-bold">
+            America's critical and rare
+            <br /> materials, ready when you are.
+          </p>
+          <div>
+            <p className="text-lg/8">
+              The complete source for US-made
+              <br /> rare earth elements and critical
+              <br />
+              materials that keeps your
+              <br /> domestic supply chain moving.
+            </p>
+
+            <Button
+              type="button"
+              variant="outline"
+              className="rounded-full my-4 text-white cursor-pointer h-auto text-xl p-1 bg-transparent hover:bg-transparent hover:text-primary"
+              onClick={() => navigate("/contact")}
+            >
+              <span className="ml-4 mr-2"> Contact Us</span>
+              <span>
+                <img src={WhiteCheck} className="h-[40px]" />
+              </span>
+            </Button>
+          </div>
+        </div>
+      </div>
       <div className="max-w-screen-xl mx-auto px-6 py-8 md:py-16">
         <div className="flex flex-col md:flex-row justify-between text-start gap-8 my-16 md:my-32">
           <div>
@@ -68,10 +100,13 @@ const HomePage = () => {
 
             <Button
               type="button"
-              className="rounded-full mt-8 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer w-[150px]"
+              className="rounded-full my-4 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer h-auto w-[180px] text-xl p-1"
               onClick={() => navigate("/contact")}
             >
-              Contact Us
+              <span className="ml-4 mr-2"> Contact Us</span>
+              <span>
+                <img src={BlackCheck} className="h-[40px]" />
+              </span>
             </Button>
           </div>
         </div>
@@ -133,10 +168,13 @@ const HomePage = () => {
             </ul>
             <Button
               type="button"
-              className="rounded-full mt-8 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer"
+              className="rounded-full my-4 bg-white text-black visible-focus:bg-primary hover:text-white cursor-pointer h-auto text-xl p-1 mt-8"
               onClick={() => navigate("/contact")}
             >
-              Contact Us
+              <span className="ml-4 mr-2"> Contact Us</span>
+              <span>
+                <img src={BlackCheck} className="h-[40px]" />
+              </span>
             </Button>
           </div>
         </div>
