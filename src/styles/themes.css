@@ -1,0 +1,30 @@
+/* src/index.css or styles/themes.css */
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222.2 47.4% 11.2%;
+  --primary: 240 5.9% 10%;
+  --primary-foreground: 0 0% 100%;
+}
+
+.dark {
+  --background: 222.2 47.4% 11.2%;
+  --foreground: 210 40% 98%;
+  --primary: 210 40% 98%;
+  --primary-foreground: 222.2 47.4% 11.2%;
+}
+
+/* Custom themes */
+.theme-ocean {
+  --background: 203 100% 94%;
+  --foreground: 218 30% 20%;
+  --primary: 203 100% 50%;
+  --primary-foreground: 0 0% 100%;
+}
+
+.theme-sunset {
+  --background: 20 100% 95%;
+  --foreground: 20 80% 20%;
+  --primary: 15 100% 50%;
+  --primary-foreground: 0 0% 100%;
+}
