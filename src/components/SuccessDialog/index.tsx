@@ -36,8 +36,8 @@ const SuccessDialog: FC<{
                 Thank you for registering with Strategic Materials Exchange™!
                 <br className="hidden md:block" />
                 Your account has been created and is now active
-                <br className="hidden md:block" /> on both SMX™ and QUXPay as a
-                corporate user.
+                <br className="hidden md:block" /> on both SMX™ and QUX Pay® as
+                a corporate user.
               </p>
               <p className="font-bold">What happens next?</p>
 
@@ -59,8 +59,15 @@ const SuccessDialog: FC<{
                 <li className="flex items-start gap-2">
                   <span className="mt-1 w-2 h-2 rounded-full bg-orange-500 shrink-0" />
                   <span className={`font-medium text-sm`}>
-                    A representative will guide you through your first
-                    transaction
+                    Your registration means you also now have a QUX Pay®
+                    account.{" "}
+                    <a
+                      href="https://quxpay.com/"
+                      target="_blank"
+                      className="text-primary underline"
+                    >
+                      You can access it here.
+                    </a>
                   </span>
                 </li>
               </ul>

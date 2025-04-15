@@ -72,10 +72,10 @@ const HomePage = () => {
             <p className="text-sm md:text-lg/8">
               Stop waiting months for basic supplies.
               <br className="hidden md:block" />
-              We stock Hyper-fine 5μ Nano-copper, Nano-gold, Antimony, Yttrium,
-              Scandium, Graphene
-              <br className="hidden md:block" /> and dozens more critical
-              materials that others put on backorder.
+              We stock Hyper-fine 5nm and Ultra-fine 35nm Nano-copper,
+              Nano-gold, Antimony, Yttrium, <br className="hidden md:block" />{" "}
+              Scandium, Graphene and dozens more critical materials that others
+              put on backorder.
             </p>
           </div>
           <div className="border-l-1 border-white hidden md:block" />

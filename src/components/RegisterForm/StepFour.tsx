@@ -39,6 +39,52 @@ export const StepFour = () => {
     <>
       <div className="grid grid-cols-1 gap-2 w-full md:w-[400px]">
         <p className="text-lg md:text-[21px]/6 mb-8">
+          Please select what your interests are:
+        </p>
+
+        <FormField
+          control={form.control}
+          name="interest"
+          rules={{
+            required: "Interest are required",
+          }}
+          render={({ field: { onChange, value } }) => {
+            const selectedValues = Array.isArray(value) ? value : [];
+            const handleCheckboxChange = (checked: boolean, item: string) => {
+              if (checked) {
+                onChange([...selectedValues, item]);
+              } else {
+                onChange(selectedValues.filter((v) => v !== item));
+              }
+            };
+
+            return (
+              <>
+                {data?.interest.map((item: string) => (
+                  <FormItem
+                    key={item}
+                    className="flex flex-row items-start space-x-3 space-y-0 mt-2"
+                  >
+                    <FormControl>
+                      <Checkbox
+                        name={item}
+                        checked={selectedValues.includes(item)}
+                        onCheckedChange={(checked) =>
+                          handleCheckboxChange(!!checked, item)
+                        }
+                        className="ml-4 mr-1"
+                      />
+                    </FormControl>
+                    <FormLabel className="font-normal m-0">{item}</FormLabel>
+                    <FormMessage />
+                  </FormItem>
+                ))}
+              </>
+            );
+          }}
+        />
+
+        <p className="text-lg md:text-[21px]/6 my-8">
           Select the materials your organization regularly requires:
         </p>
 
@@ -46,7 +92,9 @@ export const StepFour = () => {
           control={form.control}
           name="materials"
           rules={{
-            required: "Materials are required",
+            required: form.watch("other_mats")
+              ? false
+              : "Materials are required",
           }}
           render={({ field: { onChange, value } }) => {
             const selectedValues = Array.isArray(value) ? value : [];

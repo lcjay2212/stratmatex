@@ -176,6 +176,7 @@ const RegisterPage = () => {
         materials: JSON.stringify(val.materials),
         additional_materials: val.additional_materials,
         specifications: val.specifications,
+        interest: JSON.stringify(val.interest),
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } as any);
     }

@@ -47,6 +47,30 @@ export const StepOne = () => {
           </FormItem>
         )}
       />
+      <p className="font-bold text-md">Let’s keep your account secure!</p>
+      <p className="text-sm">Make sure your password includes:</p>
+      <ul className="space-y-2">
+        <li className="flex items-start gap-2">
+          <span className="mt-1 w-2 h-2 rounded-full bg-orange-500 shrink-0" />
+          <span className={`font-medium text-sm`}>Minimum of 8 characters</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="mt-1 w-2 h-2 rounded-full bg-orange-500 shrink-0" />
+          <span className={`font-medium text-sm`}>At least 1 number (0–9)</span>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="mt-1 w-2 h-2 rounded-full bg-orange-500 shrink-0" />
+          <span className={`font-medium text-sm`}>
+            At least 1 symbol (e.g. !, @, #, $)
+          </span>
+        </li>
+        <li className="flex items-start gap-2">
+          <span className="mt-1 w-2 h-2 rounded-full bg-orange-500 shrink-0" />
+          <span className={`font-medium text-sm`}>
+            At least 1 uppercase letter (A–Z)
+          </span>
+        </li>
+      </ul>
 
       <FormField
         control={form.control}
