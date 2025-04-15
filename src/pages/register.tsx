@@ -4,6 +4,7 @@ import {
   StepThree,
   StepTwo,
 } from "@/components/RegisterForm";
+import SuccessDialog from "@/components/SuccessDialog";
 import { Button } from "@/components/ui/button";
 import { Form } from "@/components/ui/form";
 import { useMutation } from "@tanstack/react-query";
@@ -25,6 +26,7 @@ const RegisterPage = () => {
   const form = useForm();
   const navigate = useNavigate();
   const [step, setStep] = useState(1);
+  const [visible, setVisible] = useState(false);
   const errorMessage = (res: Record<string, string>): void => {
     Object.keys(res).forEach((errorKey) => {
       toast.warning(`${res[errorKey]}`, {
@@ -73,11 +75,12 @@ const RegisterPage = () => {
         }
       ),
     onSuccess: () => {
-      toast.success("Corporation registration success!", {
-        duration: 5000,
-        position: "top-center",
-      });
-      navigate("/");
+      // toast.success("Corporation registration success!", {
+      //   duration: 5000,
+      //   position: "top-center",
+      // });
+      // navigate("/");
+      setVisible(true);
     },
     onError: (error) => {
       const response = (
@@ -180,6 +183,13 @@ const RegisterPage = () => {
 
   return (
     <div className="text-white text-start mx-auto w-full md:w-[400px] my-12 px-4 md:px-0">
+      {visible && (
+        <SuccessDialog
+          setVisible={setVisible}
+          visible={visible}
+          type="register"
+        />
+      )}
       <div className="flex flex-col items-center">
         <img src={logo} alt="logo" className="w-[200px]" />
       </div>

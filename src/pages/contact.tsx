@@ -1,3 +1,4 @@
+import SuccessDialog from "@/components/SuccessDialog";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -12,8 +13,8 @@ import { Separator } from "@/components/ui/separator";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "sonner";
 import BlackCheck from "../assets/icons/black-check.png";
 import Gold from "../assets/images/gold.jpg";
 
@@ -25,6 +26,7 @@ interface FormData {
 }
 
 const ContactPage = () => {
+  const [visible, setVisible] = useState(false);
   const form = useForm<FormData>();
 
   const { mutate, isPending } = useMutation({
@@ -39,7 +41,8 @@ const ContactPage = () => {
         }
       ),
     onSuccess: () => {
-      toast.success(`Inquiry has been submitted!`);
+      // toast.success(`Inquiry has been submitted!`);
+      setVisible(true);
     },
     onError: (error) => {
       const response = (
@@ -59,6 +62,13 @@ const ContactPage = () => {
   };
   return (
     <div className="mt-32 md:mt-48">
+      {visible && (
+        <SuccessDialog
+          setVisible={setVisible}
+          visible={visible}
+          type="contact"
+        />
+      )}
       <div className="flex flex-col md:flex-row justify-evenly max-w-screen-xl mx-auto mt-[5rem] p-4 md:p-0">
         <div className="text-start">
           <p className="text-primary text-[18px]">Need Help?</p>
