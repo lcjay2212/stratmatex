@@ -1,5 +1,3 @@
-import { BlackCheck } from "@/assets/icons";
-import { Gold } from "@/assets/images";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -16,6 +14,8 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "sonner";
+import BlackCheck from "../assets/icons/black-check.png";
+import Gold from "../assets/images/gold.jpg";
 
 interface FormData {
   name: string;

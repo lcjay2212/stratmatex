@@ -1,18 +1,15 @@
-import { BlackCheck } from "@/assets/icons";
-import {
-  AboutUsImageOne,
-  AboutUsImageTwo,
-  Five,
-  Four,
-  Gold,
-  One,
-  Three,
-  Two,
-} from "@/assets/images";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { useNavigate } from "react-router-dom";
-
+import BlackCheck from "../assets/icons/black-check.png";
+import One from "../assets/images/1.png";
+import Two from "../assets/images/2.png";
+import Three from "../assets/images/3.png";
+import Four from "../assets/images/4.png";
+import Five from "../assets/images/5.png";
+import AbooutUsImageOne from "../assets/images/Intersection 1.png";
+import AboutUsImageTwo from "../assets/images/about-us.png";
+import Gold from "../assets/images/gold.jpg";
 const AboutPage = () => {
   const navigate = useNavigate();
 
@@ -92,7 +89,7 @@ const AboutPage = () => {
             </p>
           </div>
           <div>
-            <img src={AboutUsImageOne} className="w-600" />
+            <img src={AbooutUsImageOne} className="w-600" />
           </div>
         </div>
 

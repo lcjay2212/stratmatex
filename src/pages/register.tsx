@@ -1,11 +1,4 @@
 import {
-  AddBankIcon,
-  BankIcon,
-  CheckIcon,
-  LockIcon,
-  LockKeyholeIcon,
-} from "@/assets/icons";
-import {
   StepFour,
   StepOne,
   StepThree,
@@ -21,6 +14,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import AddBankIcon from "../assets/icons/add-bank-icon.webp";
+import BankIcon from "../assets/icons/bank-icon.png";
+import CheckIcon from "../assets/icons/check-icon.png";
+import LockIcon from "../assets/icons/lock-icon.png";
+import LockKeyholeIcon from "../assets/icons/lock-keyhole-icon.png";
 import logo from "../assets/stratmatex-logo.png";
 
 const RegisterPage = () => {

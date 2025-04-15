@@ -1,7 +1,8 @@
-import { BlackCheck, WhiteCheck } from "@/assets/icons";
-import { GraphImage } from "@/assets/images";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
+import BlackCheck from "../assets/icons/black-check.png";
+import WhiteCheck from "../assets/icons/white-check.png";
+import GraphImage from "../assets/images/graph.png";
 
 const HomePage = () => {
   const navigate = useNavigate();
