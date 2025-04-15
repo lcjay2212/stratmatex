@@ -46,7 +46,7 @@ const AboutPage = () => {
   ];
 
   const items = [
-    "Nano-copper (hyper-fine 5µ and ultra-fine 35µ)",
+    "Nano-copper (hyper-fine 5nm and ultra-fine 35nm)",
     "Nano-gold",
     "Antimony",
     "Yttrium",
