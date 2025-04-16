@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
@@ -11,6 +12,11 @@ import RegisterPage from "./pages/register";
 function App() {
   const location = useLocation();
   const hideNavbarRoutes = ["/", "/about", "/contact"];
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [pathname]);
 
   const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
   return (
