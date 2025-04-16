@@ -1,10 +1,11 @@
 import { Menu, X } from "lucide-react"; // Optional: for icons
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/stratmatex-logo.png";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
 
   const navLinks = (
     <>
@@ -48,7 +49,12 @@ const Navbar = () => {
     <nav className="bg-black/70 text-white px-8 py-4 shadow-md absolute inset-x-0 top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center">
         <div className="flex items-center gap-2">
-          <img src={Logo} alt="Logo" className="h-12 w-auto" />
+          <img
+            src={Logo}
+            alt="Logo"
+            className="h-12 w-auto cursor-pointer"
+            onClick={() => navigate("/")}
+          />
         </div>
 
         <ul className="hidden md:flex gap-8 text-[16px]">{navLinks}</ul>
