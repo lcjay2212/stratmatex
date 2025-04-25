@@ -80,8 +80,8 @@ const ContactPage = () => {
             <p className="text-[32px] font-bold mb-2">
               Strategic Material Exchange™
             </p>
-            <p>9107 Yale Rd.</p>
-            <p>Diamond, OH 44412</p>
+            <p>8350 N. Central Expressway</p>
+            <p>Suite 1900, Dallas, TX 75206</p>
             <p>info@quxnow.com</p>
             <p>(877)-700-0789</p>
           </div>
@@ -200,8 +200,8 @@ const ContactPage = () => {
             <p className="text-[32px] font-bold mb-8">
               Strategic Material Exchange™
             </p>
-            <p>9107 Yale Rd.</p>
-            <p>Diamond, OH 44412</p>
+            <p>8350 N. Central Expressway</p>
+            <p>Suite 1900, Dallas, TX 75206</p>
             <p>info@quxnow.com</p>
             <p>(877)-700-0789</p>
           </div>
