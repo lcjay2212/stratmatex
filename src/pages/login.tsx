@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import useSignIn from "@/hooks/mutations/useSigninMutation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { z } from "zod";
 import Logo from "../assets/stratmatex-black-logo.svg";
 
@@ -133,12 +134,12 @@ const LoginPage = () => {
                     </button>
                     <div className="text-gray-400 text-sm">
                       Don't have an account?{" "}
-                      <button
-                        type="button"
+                      <Link
+                        to="/register"
                         className="text-orange-500 hover:text-orange-400 bg-transparent border-none cursor-pointer"
                       >
                         Sign up
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </form>

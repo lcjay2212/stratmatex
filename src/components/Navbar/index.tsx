@@ -1,11 +1,16 @@
-import { Menu, X } from "lucide-react"; // Optional: for icons
+import { useLogout } from "@/hooks/mutations/useLogoutMutation";
+import { useUser } from "@/store/useUser";
+import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/stratmatex-logo.png";
+import { Button } from "../ui/button";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { user } = useUser();
+  const { logout } = useLogout();
 
   const navLinks = (
     <>
@@ -71,18 +76,29 @@ const Navbar = () => {
         <ul className="hidden md:flex gap-8 text-[16px]">{navLinks}</ul>
 
         <div className="hidden md:flex gap-4 text-sm">
-          <Link
-            to="/login"
-            className="px-4 py-2 hover:border-primary hover:border-b hover:border-primary transition"
-          >
-            Sign in
-          </Link>
-          <Link
-            to="/register"
-            className="border border-white rounded-full px-6 py-2 hover:bg-primary hover:border-primary transition"
-          >
-            Sign up
-          </Link>
+          {!user ? (
+            <>
+              <Link
+                to="/login"
+                className="px-4 py-2 hover:border-primary hover:border-b transition"
+              >
+                Sign in
+              </Link>
+              <Link
+                to="/register"
+                className="border border-white rounded-full px-6 py-2 hover:bg-primary hover:border-primary transition"
+              >
+                Sign up
+              </Link>
+            </>
+          ) : (
+            <Button
+              className="px-4 py-2 hover:border-primary hover:border-b rounded-full transition cursor-pointer"
+              onClick={() => logout({ message: "Logged out successfully." })}
+            >
+              Sign out
+            </Button>
+          )}
         </div>
 
         <button
@@ -96,14 +112,35 @@ const Navbar = () => {
       {isOpen && (
         <div className="md:hidden mt-4 px-4">
           <ul className="flex flex-col gap-4 text-[16px]">{navLinks}</ul>
-          <div className="mt-4">
-            <Link
-              to="/register"
-              className="block text-center border border-white rounded-full px-6 py-2 hover:bg-primary hover:border-primary transition"
-              onClick={() => setIsOpen(false)}
-            >
-              Sign up
-            </Link>
+          <div className="mt-4 flex flex-col gap-2">
+            {!user ? (
+              <>
+                <Link
+                  to="/login"
+                  className="block text-center px-4 py-2 hover:bg-primary/20 rounded transition"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Sign in
+                </Link>
+                <Link
+                  to="/register"
+                  className="block text-center border border-white rounded-full px-6 py-2 hover:bg-primary hover:border-primary transition"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Sign up
+                </Link>
+              </>
+            ) : (
+              <Button
+                className="w-full px-4 py-2 hover:bg-primary/20 rounded transition"
+                onClick={() => {
+                  logout({ message: "Logged out successfully." });
+                  setIsOpen(false);
+                }}
+              >
+                Sign out
+              </Button>
+            )}
           </div>
         </div>
       )}

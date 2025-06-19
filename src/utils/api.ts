@@ -5,6 +5,7 @@ import axios, {
 } from "axios";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
+import { clearStorage } from "./clearStorage";
 import { queryClient } from "./queryClient";
 
 const isBrowser = typeof window !== "undefined";
@@ -38,7 +39,7 @@ const handleLogout = async (
   message: string = "Session expired. Please login again."
 ) => {
   if (isBrowser) {
-    // clearStorage(); // Clear storage
+    clearStorage(); // Clear storage
 
     // Remove auth cookie
     Cookies.remove("auth-token", {
