@@ -14,7 +14,6 @@ interface MaterialCardProps {
 export const MaterialCard: React.FC<MaterialCardProps> = ({
   image,
   title,
-  subtitle,
   onShowClick,
   className = "",
 }) => {
@@ -25,11 +24,11 @@ export const MaterialCard: React.FC<MaterialCardProps> = ({
       <CardContent className="p-0">
         {/* Image Container */}
         <div className="aspect-square bg-black p-4">
-          <div className="w-full h-full bg-gray-900 rounded-lg overflow-hidden flex items-center justify-center">
+          <div className="w-full h-full bg-gray-900 overflow-hidden flex items-center justify-center">
             <img
               src={image}
               alt={title}
-              className="w-full h-full object-cover rounded-lg"
+              className="w-full h-full object-cover"
             />
           </div>
         </div>
@@ -37,10 +36,6 @@ export const MaterialCard: React.FC<MaterialCardProps> = ({
         {/* Content Container */}
         <div className="p-6 text-center">
           <h3 className="text-white text-xl font-semibold mb-1">{title}</h3>
-          {subtitle && (
-            <p className="text-orange-500 text-sm mb-6">{subtitle}</p>
-          )}
-
           {/* Show Button */}
           <Button
             type="submit"

@@ -1,63 +1,14 @@
 import { ContactUsForm } from "@/components/@lib/form/ContactUsForm";
 import { MaterialCard } from "@/components/MaterialCard";
 import { Separator } from "@/components/ui/separator";
+import { Material, useMaterials } from "@/hooks/queries/useMaterials";
 import Gold from "../assets/images/gold.jpg";
 
-interface Material {
-  id: number;
-  image: string;
-  title: string;
-  subtitle?: string;
-}
-
 const MaterialsPage = () => {
-  const materials: Material[] = [
-    {
-      id: 1,
-      image:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&crop=center",
-      title: "Nano-copper",
-      subtitle: "(Hyper-fine 5μ)",
-    },
-    {
-      id: 2,
-      image:
-        "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop&crop=center",
-      title: "Nano-copper",
-      subtitle: "(Ultra-fine 35μ)",
-    },
-    {
-      id: 3,
-      image:
-        "https://images.unsplash.com/photo-1610375461246-83df859d849d?w=400&h=400&fit=crop&crop=center",
-      title: "Nano-gold",
-      subtitle: "",
-    },
-    {
-      id: 4,
-      image:
-        "https://images.unsplash.com/photo-1584464491033-06628f3a6b7b?w=400&h=400&fit=crop&crop=center",
-      title: "Antimony",
-      subtitle: "",
-    },
-    {
-      id: 5,
-      image:
-        "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=400&h=400&fit=crop&crop=center",
-      title: "Yttrium",
-      subtitle: "",
-    },
-    {
-      id: 6,
-      image:
-        "https://images.unsplash.com/photo-1509228468518-180dd4864904?w=400&h=400&fit=crop&crop=center",
-      title: "Scandium",
-      subtitle: "",
-    },
-  ];
+  const { data: materials, isLoading } = useMaterials();
 
   const handleShowClick = (material: Material): void => {
-    console.log(`Show clicked for: ${material.title}`);
+    console.log(`Show clicked for: ${material.material_name}`);
     // Add your custom logic here
   };
 
@@ -74,17 +25,25 @@ const MaterialsPage = () => {
       </div>
 
       <Separator className="bg-gray-500 my-12 max-w-screen-xl mx-auto" />
-      <div className="max-w-screen-xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
-        {materials.map((material: Material) => (
-          <MaterialCard
-            key={material.id}
-            image={material.image}
-            title={material.title}
-            subtitle={material.subtitle}
-            onShowClick={() => handleShowClick(material)}
-            className="hover:scale-105 transition-transform duration-200"
-          />
-        ))}
+      <div className="max-w-screen-xl mx-auto">
+        {isLoading ? (
+          <p className="text-center text-gray-500">Loading materials...</p>
+        ) : materials?.length ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-8">
+            {materials.map((material) => (
+              <MaterialCard
+                key={material.id}
+                image={material.image ?? Gold}
+                title={material.material_name}
+                subtitle={material.origin}
+                onShowClick={() => handleShowClick(material)}
+                className="hover:scale-105 transition-transform duration-200"
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-400">No materials available.</p>
+        )}
       </div>
 
       <Separator className="bg-gray-500 my-12 max-w-screen-xl mx-auto" />
