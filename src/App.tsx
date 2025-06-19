@@ -7,11 +7,13 @@ import HomePage from "./pages";
 import NotFoundPage from "./pages/404";
 import AboutPage from "./pages/about";
 import ContactPage from "./pages/contact";
+import LoginPage from "./pages/login";
+import MaterialsPage from "./pages/materials";
 import RegisterPage from "./pages/register";
 
 function App() {
   const location = useLocation();
-  const hideNavbarRoutes = ["/", "/about", "/contact"];
+  const hideNavbarRoutes = ["/", "/about", "/contact", "/materials"];
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -28,6 +30,8 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/materials" element={<MaterialsPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

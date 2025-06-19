@@ -22,6 +22,17 @@ const Navbar = () => {
       </li>
       <li>
         <NavLink
+          to="/materials"
+          className={({ isActive }) =>
+            isActive ? "text-primary font-medium" : "hover:text-primary"
+          }
+          onClick={() => setIsOpen(false)}
+        >
+          Materials
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/about"
           className={({ isActive }) =>
             isActive ? "text-primary font-medium" : "hover:text-primary"
@@ -60,6 +71,12 @@ const Navbar = () => {
         <ul className="hidden md:flex gap-8 text-[16px]">{navLinks}</ul>
 
         <div className="hidden md:flex gap-4 text-sm">
+          <Link
+            to="/login"
+            className="px-4 py-2 hover:border-primary hover:border-b hover:border-primary transition"
+          >
+            Sign in
+          </Link>
           <Link
             to="/register"
             className="border border-white rounded-full px-6 py-2 hover:bg-primary hover:border-primary transition"
