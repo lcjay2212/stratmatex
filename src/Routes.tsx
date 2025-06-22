@@ -1,10 +1,14 @@
 import { createBrowserRouter } from "react-router-dom";
+import { AuthGuard } from "./components/AuthGuard/AuthGuard";
+import DashboardLayout from "./components/DashboardLayout";
 import Layout from "./components/Layout";
 import HomePage from "./pages";
 import NotFoundPage from "./pages/404";
 import AboutPage from "./pages/about";
+import ActiveBidsPage from "./pages/ActiveBids";
 import ContactPage from "./pages/contact";
 import LoginPage from "./pages/login";
+import LogisticsAndShippingPage from "./pages/LogisticsAndShipping";
 import MaterialsPage from "./pages/materials";
 import RegisterPage from "./pages/register";
 
@@ -20,10 +24,28 @@ export const router = createBrowserRouter([
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
       { path: "materials", element: <MaterialsPage /> },
-      { path: "*", element: <NotFoundPage /> }, // fallback for unknown routes
     ],
   },
   {
-    path: "/",
+    path: "/dashboard",
+    element: (
+      <AuthGuard>
+        <DashboardLayout />
+      </AuthGuard>
+    ),
+    children: [
+      {
+        path: "active-bids",
+        element: <ActiveBidsPage />,
+      },
+      {
+        path: "logistics",
+        element: <LogisticsAndShippingPage />,
+      },
+    ],
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);

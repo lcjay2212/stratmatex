@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface UserDetails {
   token: string;
@@ -40,15 +41,23 @@ type Props = {
   setUser: (e: Partial<UserDetails> | null) => void;
 };
 
-export const useUser = create<Props>((set) => ({
-  user: null,
-  setUser: (newUserData: Partial<UserDetails> | null): void =>
-    set((state) => ({
-      user:
-        newUserData === null
-          ? null
-          : state.user
-          ? ({ ...state.user, ...newUserData } as UserDetails)
-          : (newUserData as UserDetails),
-    })),
-}));
+export const useUser = create<Props>()(
+  persist(
+    (set) => ({
+      user: null,
+      setUser: (newUserData: Partial<UserDetails> | null): void =>
+        set((state) => ({
+          user:
+            newUserData === null
+              ? null
+              : state.user
+              ? { ...state.user, ...newUserData }
+              : (newUserData as UserDetails),
+        })),
+    }),
+    {
+      name: "user-storage", // 🔐 key for localStorage
+      partialize: (state) => ({ user: state.user }), // Optional: only persist user
+    }
+  )
+);
