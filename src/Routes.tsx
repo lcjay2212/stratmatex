@@ -9,6 +9,7 @@ import ActiveBidsPage from "./pages/ActiveBids";
 import ContactPage from "./pages/contact";
 import LoginPage from "./pages/login";
 import LogisticsAndShippingPage from "./pages/LogisticsAndShipping";
+import MarketplacePage from "./pages/Marketplace";
 import MaterialsPage from "./pages/materials";
 import RegisterPage from "./pages/register";
 
@@ -41,6 +42,10 @@ export const router = createBrowserRouter([
       {
         path: "logistics",
         element: <LogisticsAndShippingPage />,
+      },
+      {
+        path: "marketplace",
+        element: <MarketplacePage />,
       },
     ],
   },
