@@ -9,7 +9,7 @@ export const columns: ColumnDef<Bid>[] = [
   {
     accessorKey: "bidId",
     header: () => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         Bid ID <Info size={16} />
       </div>
     ),
@@ -17,7 +17,7 @@ export const columns: ColumnDef<Bid>[] = [
   {
     accessorKey: "materials",
     header: () => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center  justify-center gap-2">
         Materials <Info size={16} />
       </div>
     ),
@@ -25,7 +25,7 @@ export const columns: ColumnDef<Bid>[] = [
   {
     accessorKey: "minimumIncrement",
     header: () => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         Minimum Increment <Info size={16} />
       </div>
     ),
@@ -43,7 +43,7 @@ export const columns: ColumnDef<Bid>[] = [
   {
     accessorKey: "trader",
     header: () => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         Trader <Info size={16} />
       </div>
     ),
@@ -51,7 +51,7 @@ export const columns: ColumnDef<Bid>[] = [
   {
     accessorKey: "basePrice",
     header: () => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         Base Price <Info size={16} />
       </div>
     ),
@@ -69,7 +69,7 @@ export const columns: ColumnDef<Bid>[] = [
   {
     accessorKey: "timer",
     header: () => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         Timer <Info size={16} />
       </div>
     ),
@@ -78,10 +78,10 @@ export const columns: ColumnDef<Bid>[] = [
         row.getValue("timer");
       return (
         <div className="flex flex-col gap-2">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center gap-2">
             <Clock size={16} /> {timer.startTime}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center justify-center gap-2">
             <Clock size={16} /> {timer.endTime}
           </div>
         </div>
@@ -91,7 +91,7 @@ export const columns: ColumnDef<Bid>[] = [
   {
     accessorKey: "currentPrice",
     header: () => (
-      <div className="flex items-center gap-2">
+      <div className="flex items-center justify-center gap-2">
         Current Price <Info size={16} />
       </div>
     ),
