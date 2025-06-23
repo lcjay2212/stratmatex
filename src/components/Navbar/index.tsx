@@ -1,6 +1,6 @@
 import { useLogout } from "@/hooks/mutations/useLogoutMutation";
 import { useUser } from "@/store/useUser";
-import { Menu, X } from "lucide-react";
+import { LayoutDashboard, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import Logo from "../../assets/stratmatex-logo.png";
@@ -92,12 +92,17 @@ const Navbar = () => {
               </Link>
             </>
           ) : (
-            <Button
-              className="px-4 py-2 hover:border-primary hover:border-b rounded-full transition cursor-pointer"
-              onClick={() => logout({ message: "Logged out successfully." })}
-            >
-              Sign out
-            </Button>
+            <div className="flex items-center gap-4">
+              <Link to="/dashboard/active-bids">
+                <LayoutDashboard className="h-5 w-5 hover:text-primary transition" />
+              </Link>
+              <Button
+                className="px-4 py-2 hover:border-primary hover:border-b rounded-full transition cursor-pointer"
+                onClick={() => logout({ message: "Logged out successfully." })}
+              >
+                Sign out
+              </Button>
+            </div>
           )}
         </div>
 
@@ -131,15 +136,23 @@ const Navbar = () => {
                 </Link>
               </>
             ) : (
-              <Button
-                className="w-full px-4 py-2 hover:bg-primary/20 rounded transition"
-                onClick={() => {
-                  logout({ message: "Logged out successfully." });
-                  setIsOpen(false);
-                }}
-              >
-                Sign out
-              </Button>
+              <div className="flex items-center justify-end gap-4">
+                <Link
+                  to="/dashboard/active-bids"
+                  onClick={() => setIsOpen(false)}
+                >
+                  <LayoutDashboard className="h-6 w-6 text-white hover:text-primary" />
+                </Link>
+                <Button
+                  className="px-4 py-2 hover:bg-primary/20 rounded transition"
+                  onClick={() => {
+                    logout({ message: "Logged out successfully." });
+                    setIsOpen(false);
+                  }}
+                >
+                  Sign out
+                </Button>
+              </div>
             )}
           </div>
         </div>

@@ -104,7 +104,7 @@ api.interceptors.response.use(
           }
         );
 
-        localStorage.setItem("QUX_USER_TOKEN", data.accessToken);
+        localStorage.setItem("SMX_USER_TOKEN", data.accessToken);
         api.defaults.headers.common[
           "Authorization"
         ] = `Bearer ${data.accessToken}`;
@@ -128,7 +128,7 @@ api.interceptors.response.use(
 );
 
 api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  const token = isBrowser ? localStorage.getItem("QUX_USER_TOKEN") : null;
+  const token = isBrowser ? localStorage.getItem("SMX_USER_TOKEN") : null;
   if (token) {
     if (config.headers) {
       config.headers.set("Authorization", `Bearer ${token}`);
