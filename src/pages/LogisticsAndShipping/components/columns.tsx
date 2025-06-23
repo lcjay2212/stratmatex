@@ -8,25 +8,25 @@ import { Shipping } from "../data/schema";
 
 export const columns: ColumnDef<Shipping>[] = [
   {
-    accessorKey: "shippingId",
+    accessorKey: "reference_number",
     header: () => (
       <div className="flex items-center gap-2 text-left">
         Shipping ID <Info size={16} />
       </div>
     ),
     cell: ({ row }) => (
-      <div className="text-left">{row.getValue("shippingId")}</div>
+      <div className="text-left">{row.getValue("reference_number")}</div>
     ),
   },
   {
-    accessorKey: "materials",
+    accessorKey: "material_name",
     header: () => (
       <div className="flex items-center gap-2 text-left">
         Materials <Info size={16} />
       </div>
     ),
     cell: ({ row }) => (
-      <div className="text-left">{row.getValue("materials")}</div>
+      <div className="text-left">{row.getValue("material_name")}</div>
     ),
   },
   {
@@ -61,15 +61,13 @@ export const columns: ColumnDef<Shipping>[] = [
     ),
   },
   {
-    accessorKey: "dropLocation",
+    accessorKey: "drop",
     header: () => (
       <div className="flex items-center gap-2 text-left">
         Drop Location <Info size={16} />
       </div>
     ),
-    cell: ({ row }) => (
-      <div className="text-left">{row.getValue("dropLocation")}</div>
-    ),
+    cell: ({ row }) => <div className="text-left">{row.getValue("drop")}</div>,
   },
   {
     accessorKey: "amount",
@@ -78,16 +76,9 @@ export const columns: ColumnDef<Shipping>[] = [
         Amount <Info size={16} />
       </div>
     ),
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-      }).format(amount);
-      return <div className="font-medium text-right">{formatted}</div>;
-    },
+    cell: ({ row }) => (
+      <div className="font-medium text-right">{row.getValue("amount")}</div>
+    ),
   },
   {
     accessorKey: "status",

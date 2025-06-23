@@ -3,13 +3,14 @@ import { z } from "zod";
 export const shippingStatus = z.enum(["Shipped", "In transit"]);
 
 export const shippingSchema = z.object({
-  shippingId: z.string(),
-  materials: z.string(),
+  id: z.string(),
+  material_name: z.string(),
   volume: z.string(),
   date: z.string(),
   origin: z.string(),
-  dropLocation: z.string(),
-  amount: z.number(),
+  drop: z.string(),
+  amount: z.string(),
+  reference_number: z.string(),
   status: shippingStatus,
 });
 
