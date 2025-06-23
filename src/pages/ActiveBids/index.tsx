@@ -8,7 +8,6 @@ const ActiveBidsPage = () => {
   return (
     <div className="h-full w-full p-8">
       <div className="bg-white p-8 rounded-lg shadow-md">
-        <h2 className="text-3xl font-bold mb-6">ACTIVE BIDS</h2>
         {isLoading ? (
           <div>Loading...</div>
         ) : (
