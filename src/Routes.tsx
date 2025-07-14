@@ -11,6 +11,7 @@ import LoginPage from "./pages/login";
 import LogisticsAndShippingPage from "./pages/LogisticsAndShipping";
 import MarketplacePage from "./pages/Marketplace";
 import MaterialsPage from "./pages/materials";
+import ProfilePage from "./pages/profile";
 import RegisterPage from "./pages/register";
 import SellMaterialsPage from "./pages/SellMaterials";
 import WebSocketTestPage from "./pages/websocket-test";
@@ -53,6 +54,10 @@ export const router = createBrowserRouter([
       {
         path: "sell-materials",
         element: <SellMaterialsPage />,
+      },
+      {
+        path: "my-profile",
+        element: <ProfilePage />,
       },
     ],
   },
