@@ -6,7 +6,7 @@ import { Outlet } from "react-router-dom";
 
 const DashboardHeader = () => {
   return (
-    <header className="bg-black text-white p-4 flex justify-between items-center h-20">
+    <header className="bg-black text-white p-4 flex justify-between items-center">
       <img src={StratMateXLogo} alt="StratMateX" className="h-10" />
       <div className="flex items-center space-x-4">
         <Button variant="ghost" className="text-white hover:text-gray-300">
@@ -24,7 +24,7 @@ const DashboardHeader = () => {
 
 const DashboardLayout = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen bg-gray-100 flex flex-col w-auto">
       <DashboardHeader />
       <div className="flex flex-1">
         <Sidebar />

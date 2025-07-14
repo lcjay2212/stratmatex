@@ -12,6 +12,8 @@ import LogisticsAndShippingPage from "./pages/LogisticsAndShipping";
 import MarketplacePage from "./pages/Marketplace";
 import MaterialsPage from "./pages/materials";
 import RegisterPage from "./pages/register";
+import SellMaterialsPage from "./pages/SellMaterials";
+import WebSocketTestPage from "./pages/websocket-test";
 
 export const router = createBrowserRouter([
   {
@@ -25,6 +27,7 @@ export const router = createBrowserRouter([
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
       { path: "materials", element: <MaterialsPage /> },
+      { path: "websocket-test", element: <WebSocketTestPage /> },
     ],
   },
   {
@@ -46,6 +49,10 @@ export const router = createBrowserRouter([
       {
         path: "marketplace",
         element: <MarketplacePage />,
+      },
+      {
+        path: "sell-materials",
+        element: <SellMaterialsPage />,
       },
     ],
   },

@@ -18,6 +18,10 @@ const sidebarLinks = [
     path: "/dashboard/marketplace",
   },
   {
+    name: "Keys & Vaults",
+    path: "/dashboard/keys-vaults",
+  },
+  {
     name: "Sell Materials",
     path: "/dashboard/sell-materials",
   },
