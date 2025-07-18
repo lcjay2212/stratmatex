@@ -5,6 +5,7 @@ import { StrictMode, useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 import "./App.css";
 import { Toaster } from "./components/ui/sonner.tsx";
+import { useLogoutListener } from "./hooks/useLogoutListener";
 import "./index.css";
 import { router } from "./Routes";
 import { useWebSocketStore } from "./store/useWebSocketStore";
@@ -22,6 +23,9 @@ Sentry.init({
 
 function App() {
   const connect = useWebSocketStore((state) => state.connect);
+
+  // Initialize logout listener to clear user store
+  useLogoutListener();
 
   useEffect(() => {
     // Initialize WebSocket connection

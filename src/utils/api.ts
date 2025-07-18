@@ -39,26 +39,49 @@ const handleLogout = async (
   message: string = "Session expired. Please login again."
 ) => {
   if (isBrowser) {
-    clearStorage(); // Clear storage
+    try {
+      // Clear all storage
+      clearStorage();
 
-    // Remove auth cookie
-    Cookies.remove("auth-token", {
-      secure: import.meta.env.MODE === "production",
-      sameSite: "strict",
-    });
+      // Remove auth cookie
+      Cookies.remove("auth-token", {
+        secure: import.meta.env.MODE === "production",
+        sameSite: "strict",
+      });
 
-    // Show toast notification
-    toast.error(message, {
-      duration: 5000,
-      richColors: true,
-    });
+      // Clear all queries from react-query
+      queryClient.clear();
 
-    // Clear all queries from react-query
-    queryClient.clear();
+      // Reset axios default headers
+      delete api.defaults.headers.common["Authorization"];
 
-    // If we're not already on the login page, redirect to shop
-    if (window.location.pathname !== "/register") {
-      window.location.href = "/register";
+      // Clear user store state (this will also clear the persisted state)
+      // Note: We can't import useUser here due to circular dependency
+      // The user store will be cleared when the component re-renders
+      // or we can dispatch a custom event to clear it
+      window.dispatchEvent(new CustomEvent("clear-user-store"));
+
+      // Show toast notification
+      toast.error(message, {
+        duration: 5000,
+        richColors: true,
+      });
+
+      // Reset refresh state
+      isRefreshing = false;
+      failedQueue = [];
+
+      // Redirect to login page if not already there
+      const currentPath = window.location.pathname;
+      const publicRoutes = ["/login", "/register", "/"];
+
+      if (!publicRoutes.includes(currentPath)) {
+        window.location.href = "/login";
+      }
+    } catch (error) {
+      console.error("Error during logout:", error);
+      // Force redirect even if there's an error
+      window.location.href = "/login";
     }
   }
 };
@@ -92,7 +115,7 @@ api.interceptors.response.use(
       // If no refresh token exists, logout immediately
       if (!refreshToken) {
         isRefreshing = false;
-        // await handleLogout();
+        await handleLogout("No refresh token found. Please login again.");
         return Promise.reject(error);
       }
 
@@ -104,23 +127,32 @@ api.interceptors.response.use(
           }
         );
 
-        localStorage.setItem("SMX_USER_TOKEN", data.accessToken);
-        api.defaults.headers.common[
-          "Authorization"
-        ] = `Bearer ${data.accessToken}`;
-        processQueue(null, data.accessToken);
+        if (data.accessToken) {
+          localStorage.setItem("SMX_USER_TOKEN", data.accessToken);
+          api.defaults.headers.common[
+            "Authorization"
+          ] = `Bearer ${data.accessToken}`;
+          processQueue(null, data.accessToken);
 
-        return api(originalRequest);
+          return api(originalRequest);
+        } else {
+          throw new Error("No access token received");
+        }
       } catch (refreshError) {
         processQueue(refreshError as AxiosError, null);
 
         // Handle logout on refresh token failure
-        await handleLogout();
+        await handleLogout("Token refresh failed. Please login again.");
 
         return Promise.reject(refreshError);
       } finally {
         isRefreshing = false;
       }
+    }
+
+    // Handle other error status codes
+    if (error.response?.status === 403) {
+      await handleLogout("Access denied. Please login again.");
     }
 
     return Promise.reject(error);
