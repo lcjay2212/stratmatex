@@ -7,6 +7,7 @@ import NotFoundPage from "./pages/404";
 import AboutPage from "./pages/about";
 import ActiveBidsPage from "./pages/ActiveBids";
 import ContactPage from "./pages/contact";
+import HelpPage from "./pages/Help";
 import LoginPage from "./pages/login";
 import LogisticsAndShippingPage from "./pages/LogisticsAndShipping";
 import MarketplacePage from "./pages/Marketplace";
@@ -25,6 +26,7 @@ export const router = createBrowserRouter([
       { path: "", element: <HomePage /> },
       { path: "about", element: <AboutPage /> },
       { path: "contact", element: <ContactPage /> },
+
       { path: "login", element: <LoginPage /> },
       { path: "register", element: <RegisterPage /> },
       { path: "materials", element: <MaterialsPage /> },
@@ -59,6 +61,7 @@ export const router = createBrowserRouter([
         path: "my-profile",
         element: <ProfilePage />,
       },
+      { path: "help", element: <HelpPage /> },
     ],
   },
   {
