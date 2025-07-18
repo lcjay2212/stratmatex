@@ -487,11 +487,9 @@ export const SellMaterialsForm = ({
                         </FormItem>
                       )}
                     />
-                    <span className="text-sm text-gray-600 font-medium">
-                      Per
-                    </span>
+                    <span className="text-md text-gray-600 font-bold">Per</span>
                     {form.watch("multiple_only") ? (
-                      <div className="text-md text-gray-600 font-bold">
+                      <div className="text-md text-gray-600 font-bold uppercase">
                         {[form.watch("quantity"), form.watch("volume_type")]
                           .filter(Boolean)
                           .join(" ")}
@@ -503,11 +501,16 @@ export const SellMaterialsForm = ({
                         render={({ field }) => (
                           <FormItem>
                             <FormControl>
-                              <Input
-                                variant="light"
-                                className="h-12 text-base"
-                                {...field}
-                              />
+                              <div className="flex items-center gap-2">
+                                <Input
+                                  variant="light"
+                                  className="h-12 text-center text-base w-20"
+                                  {...field}
+                                />
+                                <span className="text-md text-gray-600 font-bold uppercase">
+                                  {form.watch("volume_type")}
+                                </span>
+                              </div>
                             </FormControl>
                           </FormItem>
                         )}
