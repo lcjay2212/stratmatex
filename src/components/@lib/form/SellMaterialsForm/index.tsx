@@ -26,7 +26,7 @@ const defaultValues: SellMaterialsFormValues = {
   quantity: "",
   volume_type: "",
   multiple_only: false,
-  multiplies_volume: "5",
+  multiplies_volume: "",
   price: "",
   is_hazmat: false,
   hazmat_category: "",
@@ -45,7 +45,6 @@ interface SellMaterialsFormProps {
   onSubmit?: (data: SellMaterialsFormValues) => void;
   onCancel?: () => void;
   onBack?: () => void;
-  title?: string;
   submitButtonText?: string;
   cancelButtonText?: string;
 }
@@ -54,7 +53,6 @@ export const SellMaterialsForm = ({
   onSubmit,
   onCancel,
   onBack,
-  title = "Create Material Listing",
   submitButtonText = "Create Listing",
   cancelButtonText = "Cancel",
 }: SellMaterialsFormProps) => {
@@ -64,8 +62,6 @@ export const SellMaterialsForm = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const downloadableInputRef = useRef<HTMLInputElement>(null);
   const { data: utilities } = useUtilities();
-
-  console.log(utilities?.volume_types);
 
   const handleSubmit = (data: SellMaterialsFormValues) => {
     if (onSubmit) {
@@ -80,7 +76,7 @@ export const SellMaterialsForm = ({
       <div className="max-w-4xl mx-auto px-4">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           {/* Header */}
-          <div className="border-b border-gray-100 px-8 py-6">
+          <div className="px-8 pt-6">
             <div className="flex items-center justify-between">
               {onBack && (
                 <button
@@ -91,8 +87,6 @@ export const SellMaterialsForm = ({
                   <ArrowLeft className="h-5 w-5 text-gray-600" />
                 </button>
               )}
-              <h1 className="text-xl font-semibold text-gray-900">{title}</h1>
-              <div className="w-10"></div> {/* Spacer for centering */}
             </div>
           </div>
 
@@ -426,7 +420,16 @@ export const SellMaterialsForm = ({
                           <input
                             type="checkbox"
                             checked={field.value}
-                            onChange={(e) => field.onChange(e.target.checked)}
+                            onChange={(e) => {
+                              const isChecked = e.target.checked;
+                              field.onChange(isChecked);
+                              if (isChecked) {
+                                const quantity = form.getValues("quantity");
+                                if (quantity) {
+                                  form.setValue("multiplies_volume", quantity);
+                                }
+                              }
+                            }}
                             className="w-5 h-5 text-orange-500 border-gray-300 rounded focus:ring-orange-500"
                           />
                           <span className="text-sm font-medium text-gray-700">

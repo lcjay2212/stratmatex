@@ -37,7 +37,6 @@ const SellMaterials = () => {
       onSubmit={handleSubmit}
       onCancel={handleCancel}
       onBack={handleBack}
-      title="Create Material Listing"
       submitButtonText={isPending ? "Creating..." : "Create Listing"}
       cancelButtonText="Cancel"
     />

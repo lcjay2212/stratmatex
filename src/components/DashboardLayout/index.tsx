@@ -1,10 +1,16 @@
 import StratMateXLogo from "@/assets/stratmatex-logo.png";
 import Sidebar from "@/components/Sidebar";
 import { Button } from "@/components/ui/button";
+import { useLogout } from "@/hooks/mutations";
 import { ChevronDown, Globe } from "lucide-react";
 import { Outlet } from "react-router-dom";
 
 const DashboardHeader = () => {
+  const { logout } = useLogout();
+  const handleLogout = () => {
+    logout({ message: "Logged out successfully." });
+  };
+
   return (
     <header className="bg-black text-white p-4 flex justify-between items-center">
       <img src={StratMateXLogo} alt="StratMateX" className="h-10" />
@@ -14,7 +20,11 @@ const DashboardHeader = () => {
           Change language
           <ChevronDown size={16} className="ml-2" />
         </Button>
-        <Button variant="ghost" className="text-white hover:text-gray-300">
+        <Button
+          variant="ghost"
+          className="text-white hover:text-gray-300"
+          onClick={handleLogout}
+        >
           Log out
         </Button>
       </div>
