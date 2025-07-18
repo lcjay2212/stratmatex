@@ -1,22 +1,22 @@
 export interface SellMaterialsFormValues {
-  materialName: string;
+  material_name: string;
+  purchase_type: "bid" | "fixed_price";
   description: string;
-  technicalProperties: string;
-  availableVolume: string;
-  volumeType: string;
-  multiplesOf: string;
-  isMultiplesOnly: boolean;
-  basePrice: string;
-  priceUnit: string;
-  address1: string;
-  address2: string;
+  technical_properties: string;
+  quantity: string;
+  volume_type: string;
+  multiple_only: boolean;
+  multiplies_volume: string;
+  price: string;
+  is_hazmat: boolean;
+  hazmat_category: string;
+  address: string;
+  address_2: string;
   city: string;
   state: string;
-  zip: string;
+  zip_code: string;
   country: string;
-  isHazmat: boolean;
-  hazmatCategory: string;
-  purchaseType: string;
-  materialPhoto?: File | null;
-  downloadableFiles: File[];
+  phone_number: string;
+  files: File[];
+  resources: File[];
 }

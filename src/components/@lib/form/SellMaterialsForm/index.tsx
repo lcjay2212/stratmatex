@@ -15,29 +15,30 @@ import { useUtilities } from "@/hooks/queries/useUtilities";
 import { ArrowLeft, ChevronDown, Info, Upload, X } from "lucide-react";
 import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { SellMaterialsFormValues } from "./types";
+import { SellMaterialsFormValues } from "../types";
+import { PurchaseTypeField } from "./PurchaseTypeField";
 
 const defaultValues: SellMaterialsFormValues = {
-  materialName: "",
+  material_name: "",
+  purchase_type: "bid",
   description: "",
-  technicalProperties: "",
-  availableVolume: "",
-  volumeType: "",
-  multiplesOf: "5",
-  isMultiplesOnly: false,
-  basePrice: "",
-  priceUnit: "",
-  address1: "",
-  address2: "",
+  technical_properties: "",
+  quantity: "",
+  volume_type: "",
+  multiple_only: false,
+  multiplies_volume: "5",
+  price: "",
+  is_hazmat: false,
+  hazmat_category: "",
+  address: "",
+  address_2: "",
   city: "",
   state: "",
-  zip: "",
+  zip_code: "",
   country: "",
-  isHazmat: true,
-  hazmatCategory: "",
-  purchaseType: "open",
-  materialPhoto: null,
-  downloadableFiles: [],
+  phone_number: "",
+  files: [],
+  resources: [],
 };
 
 interface SellMaterialsFormProps {
@@ -74,52 +75,6 @@ export const SellMaterialsForm = ({
     }
   };
 
-  // Handle material photo selection
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      form.setValue("materialPhoto", file);
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
-
-  // Handle downloadable files
-  const handleDownloadableFileChange = (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const files = Array.from(e.target.files || []);
-    setDownloadedFiles((prev) => [...prev, ...files]);
-    form.setValue("downloadableFiles", [...downloadedFiles, ...files]);
-  };
-
-  const removeDownloadableFile = (index: number) => {
-    const newFiles = downloadedFiles.filter((_, i) => i !== index);
-    setDownloadedFiles(newFiles);
-    form.setValue("downloadableFiles", newFiles);
-  };
-
-  // Handle drag and drop
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const file = e.dataTransfer.files?.[0];
-    if (file && file.type.startsWith("image/")) {
-      form.setValue("materialPhoto", file);
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-
-  const removeImage = () => {
-    form.setValue("materialPhoto", null);
-    setImagePreview(null);
-    if (fileInputRef.current) {
-      fileInputRef.current.value = "";
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gray-50 py-8 text-start ">
       <div className="max-w-4xl mx-auto px-4">
@@ -147,151 +102,91 @@ export const SellMaterialsForm = ({
               className="p-8 space-y-8"
             >
               {/* Upload Material Photos Section */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Upload Material Photos (Optional)
-                  </label>
-                  <Info className="h-4 w-4 text-gray-400" />
-                </div>
-
-                <input
-                  type="file"
-                  accept="image/*"
-                  ref={fileInputRef}
-                  className="hidden"
-                  onChange={handleFileChange}
-                />
-
-                <div
-                  className="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-gray-400 cursor-pointer hover:border-orange-300 transition-colors bg-gray-50"
-                  onDrop={handleDrop}
-                  onDragOver={handleDragOver}
-                  onClick={() => fileInputRef.current?.click()}
-                >
-                  {imagePreview ? (
-                    <div className="relative">
-                      <img
-                        src={imagePreview}
-                        alt="Preview"
-                        className="max-h-48 rounded-lg shadow-sm"
-                      />
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          removeImage();
-                        }}
-                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
-                      >
-                        <X className="h-4 w-4" />
-                      </button>
+              <FormField
+                control={form.control}
+                name="files"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center gap-2 mb-2">
+                      <FormLabel className="text-sm font-medium text-gray-700">
+                        Upload Material Photos (Optional)
+                      </FormLabel>
+                      <Info className="h-4 w-4 text-gray-400" />
                     </div>
-                  ) : (
-                    <>
-                      <Upload className="h-12 w-12 mb-4 text-gray-400" />
-                      <p className="text-sm font-medium text-gray-500 mb-1">
-                        Drag and drop or upload a file
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        Supports: JPG, PNG, GIF up to 10MB
-                      </p>
-                    </>
-                  )}
-                </div>
-              </div>
+                    <FormControl>
+                      <div className="space-y-4">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          ref={fileInputRef}
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file && file.type.startsWith("image/")) {
+                              field.onChange([file]);
+                              setImagePreview(URL.createObjectURL(file));
+                            }
+                          }}
+                        />
+
+                        <div
+                          className="border-2 border-dashed border-gray-300 rounded-xl p-8 flex flex-col items-center justify-center text-gray-400 cursor-pointer hover:border-orange-300 transition-colors bg-gray-50"
+                          onDrop={(e) => {
+                            e.preventDefault();
+                            const file = e.dataTransfer.files?.[0];
+                            if (file && file.type.startsWith("image/")) {
+                              field.onChange([file]);
+                              setImagePreview(URL.createObjectURL(file));
+                            }
+                          }}
+                          onDragOver={(e) => {
+                            e.preventDefault();
+                          }}
+                          onClick={() => fileInputRef.current?.click()}
+                        >
+                          {imagePreview ? (
+                            <div className="relative">
+                              <img
+                                src={imagePreview}
+                                alt="Preview"
+                                className="max-h-48 rounded-lg shadow-sm"
+                              />
+                              <button
+                                type="button"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  field.onChange([]);
+                                  setImagePreview(null);
+                                  if (fileInputRef.current) {
+                                    fileInputRef.current.value = "";
+                                  }
+                                }}
+                                className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors"
+                              >
+                                <X className="h-4 w-4" />
+                              </button>
+                            </div>
+                          ) : (
+                            <>
+                              <Upload className="h-12 w-12 mb-4 text-gray-400" />
+                              <p className="text-sm font-medium text-gray-500 mb-1">
+                                Drag and drop or upload a file
+                              </p>
+                              <p className="text-xs text-gray-400">
+                                Supports: JPG, PNG, GIF up to 10MB
+                              </p>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
               {/* Purchase Type Section */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Purchase Type
-                  </label>
-                  <Info className="h-4 w-4 text-gray-400" />
-                </div>
-                <FormField
-                  control={form.control}
-                  name="purchaseType"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormControl>
-                        <div className="flex gap-4">
-                          <label className="cursor-pointer">
-                            <input
-                              type="radio"
-                              value="open"
-                              checked={field.value === "open"}
-                              onChange={() => field.onChange("open")}
-                              className="sr-only"
-                            />
-                            <div
-                              className={`p-4 border-2 rounded-xl transition-all ${
-                                field.value === "open"
-                                  ? "border-orange-500 bg-orange-50"
-                                  : "border-gray-200 hover:border-gray-300"
-                              }`}
-                            >
-                              <div className="flex items-center gap-3">
-                                <div
-                                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                    field.value === "open"
-                                      ? "border-orange-500"
-                                      : "border-gray-300"
-                                  }`}
-                                >
-                                  {field.value === "open" && (
-                                    <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-                                  )}
-                                </div>
-                                <div>
-                                  <span className="text-sm font-medium text-gray-700">
-                                    Open for bids
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </label>
-                          <label className="cursor-pointer">
-                            <input
-                              type="radio"
-                              value="fixed"
-                              checked={field.value === "fixed"}
-                              onChange={() => field.onChange("fixed")}
-                              className="sr-only"
-                            />
-                            <div
-                              className={`p-4 border-2 rounded-xl transition-all ${
-                                field.value === "fixed"
-                                  ? "border-orange-500 bg-orange-50"
-                                  : "border-gray-200 hover:border-gray-300"
-                              }`}
-                            >
-                              <div className="flex items-center gap-3">
-                                <div
-                                  className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                                    field.value === "fixed"
-                                      ? "border-orange-500"
-                                      : "border-gray-300"
-                                  }`}
-                                >
-                                  {field.value === "fixed" && (
-                                    <div className="w-3 h-3 rounded-full bg-orange-500"></div>
-                                  )}
-                                </div>
-                                <div>
-                                  <span className="text-sm font-medium text-gray-700">
-                                    Fixed Price
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          </label>
-                        </div>
-                      </FormControl>
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <PurchaseTypeField control={form.control} />
 
               {/* Material Details Section */}
               <div className="space-y-6">
@@ -301,7 +196,7 @@ export const SellMaterialsForm = ({
 
                 <FormField
                   control={form.control}
-                  name="materialName"
+                  name="material_name"
                   rules={{ required: "Material Name is required" }}
                   render={({ field }) => (
                     <FormItem>
@@ -350,7 +245,7 @@ export const SellMaterialsForm = ({
 
                 <FormField
                   control={form.control}
-                  name="technicalProperties"
+                  name="technical_properties"
                   render={({ field }) => (
                     <FormItem>
                       <div className="flex items-center gap-2 mb-2">
@@ -374,56 +269,78 @@ export const SellMaterialsForm = ({
               </div>
 
               {/* Downloadable Resources Section */}
-              <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <label className="text-sm font-medium text-gray-700">
-                    Downloadable Resources
-                  </label>
-                  <Info className="h-4 w-4 text-gray-400" />
-                </div>
+              <FormField
+                control={form.control}
+                name="resources"
+                render={({ field }) => (
+                  <FormItem>
+                    <div className="flex items-center gap-2 mb-2">
+                      <FormLabel className="text-sm font-medium text-gray-700">
+                        Downloadable Resources
+                      </FormLabel>
+                      <Info className="h-4 w-4 text-gray-400" />
+                    </div>
+                    <FormControl>
+                      <div className="space-y-4">
+                        <input
+                          type="file"
+                          multiple
+                          ref={downloadableInputRef}
+                          className="hidden"
+                          onChange={(e) => {
+                            const files = Array.from(e.target.files || []);
+                            const currentFiles = field.value || [];
+                            const newFiles = [...currentFiles, ...files];
+                            field.onChange(newFiles);
+                            setDownloadedFiles(newFiles);
+                          }}
+                        />
 
-                <input
-                  type="file"
-                  multiple
-                  ref={downloadableInputRef}
-                  className="hidden"
-                  onChange={handleDownloadableFileChange}
-                />
-
-                <Button
-                  type="button"
-                  className="bg-orange-500 hover:bg-orange-600 text-white"
-                  onClick={() => downloadableInputRef.current?.click()}
-                >
-                  <Upload className="h-4 w-4 mr-2" />
-                  Upload a file
-                </Button>
-
-                {downloadedFiles.length > 0 && (
-                  <div className="space-y-2">
-                    {downloadedFiles.map((file, index) => (
-                      <div
-                        key={index}
-                        className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
-                      >
-                        <div className="flex items-center gap-3">
-                          <Upload className="h-4 w-4 text-gray-400" />
-                          <span className="text-sm text-gray-700">
-                            {file.name}
-                          </span>
-                        </div>
-                        <button
+                        <Button
                           type="button"
-                          onClick={() => removeDownloadableFile(index)}
-                          className="text-red-500 hover:text-red-600"
+                          className="bg-orange-500 hover:bg-orange-600 text-white"
+                          onClick={() => downloadableInputRef.current?.click()}
                         >
-                          <X className="h-4 w-4" />
-                        </button>
+                          <Upload className="h-4 w-4 mr-2" />
+                          Upload a file
+                        </Button>
+
+                        {downloadedFiles.length > 0 && (
+                          <div className="space-y-2">
+                            {downloadedFiles.map((file, index) => (
+                              <div
+                                key={index}
+                                className="flex items-center justify-between p-3 bg-gray-50 rounded-lg"
+                              >
+                                <div className="flex items-center gap-3">
+                                  <Upload className="h-4 w-4 text-gray-400" />
+                                  <span className="text-sm text-gray-700">
+                                    {file.name}
+                                  </span>
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    const newFiles = downloadedFiles.filter(
+                                      (_, i) => i !== index
+                                    );
+                                    field.onChange(newFiles);
+                                    setDownloadedFiles(newFiles);
+                                  }}
+                                  className="text-red-500 hover:text-red-600"
+                                >
+                                  <X className="h-4 w-4" />
+                                </button>
+                              </div>
+                            ))}
+                          </div>
+                        )}
                       </div>
-                    ))}
-                  </div>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
                 )}
-              </div>
+              />
 
               {/* Quantity Section */}
               <div className="space-y-6">
@@ -434,20 +351,20 @@ export const SellMaterialsForm = ({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField
                     control={form.control}
-                    name="availableVolume"
-                    rules={{ required: "Available Volume is required" }}
+                    name="quantity"
+                    rules={{ required: "Quantity is required" }}
                     render={({ field }) => (
                       <FormItem>
                         <div className="flex items-center gap-2 mb-2">
                           <FormLabel className="text-sm font-medium text-gray-700">
-                            Available Volume
+                            Quantity
                           </FormLabel>
                           <Info className="h-4 w-4 text-gray-400" />
                         </div>
                         <FormControl>
                           <Input
                             variant="light"
-                            placeholder="Enter volume"
+                            placeholder="Enter quantity"
                             className="h-12 text-base"
                             {...field}
                           />
@@ -459,7 +376,7 @@ export const SellMaterialsForm = ({
 
                   <FormField
                     control={form.control}
-                    name="volumeType"
+                    name="volume_type"
                     rules={{ required: "Volume Type is required" }}
                     render={({ field }) => (
                       <FormItem>
@@ -482,6 +399,7 @@ export const SellMaterialsForm = ({
                               </option>
                               {utilities?.volume_types.map((type) => (
                                 <option
+                                  key={type.abbreviation}
                                   value={type.abbreviation}
                                   className="bg-orange-500 text-white"
                                 >
@@ -500,7 +418,7 @@ export const SellMaterialsForm = ({
 
                 <FormField
                   control={form.control}
-                  name="isMultiplesOnly"
+                  name="multiple_only"
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
@@ -518,8 +436,8 @@ export const SellMaterialsForm = ({
                             variant="light"
                             className="h-10 text-center w-25 uppercase"
                             value={[
-                              form.watch("availableVolume"),
-                              form.watch("volumeType"),
+                              form.watch("quantity"),
+                              form.watch("volume_type"),
                             ]
                               .filter(Boolean)
                               .join(" ")}
@@ -548,8 +466,8 @@ export const SellMaterialsForm = ({
                   <div className="flex items-center gap-4">
                     <FormField
                       control={form.control}
-                      name="basePrice"
-                      rules={{ required: "Base Price is required" }}
+                      name="price"
+                      rules={{ required: "Price is required" }}
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
@@ -572,19 +490,16 @@ export const SellMaterialsForm = ({
                     <span className="text-sm text-gray-600 font-medium">
                       Per
                     </span>
-                    {form.watch("isMultiplesOnly") ? (
+                    {form.watch("multiple_only") ? (
                       <div className="text-md text-gray-600 font-bold">
-                        {[
-                          form.watch("availableVolume"),
-                          form.watch("volumeType"),
-                        ]
+                        {[form.watch("quantity"), form.watch("volume_type")]
                           .filter(Boolean)
                           .join(" ")}
                       </div>
                     ) : (
                       <FormField
                         control={form.control}
-                        name="priceUnit"
+                        name="multiplies_volume"
                         render={({ field }) => (
                           <FormItem>
                             <FormControl>
@@ -611,11 +526,11 @@ export const SellMaterialsForm = ({
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <FormField
                     control={form.control}
-                    name="address1"
+                    name="address"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-gray-700">
-                          Address 1
+                          Address
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -631,7 +546,7 @@ export const SellMaterialsForm = ({
                   />
                   <FormField
                     control={form.control}
-                    name="address2"
+                    name="address_2"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-gray-700">
@@ -694,11 +609,11 @@ export const SellMaterialsForm = ({
                   />
                   <FormField
                     control={form.control}
-                    name="zip"
+                    name="zip_code"
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-gray-700">
-                          Zip
+                          Zip Code
                         </FormLabel>
                         <FormControl>
                           <Input
@@ -748,7 +663,7 @@ export const SellMaterialsForm = ({
                   <div className="flex items-center gap-3">
                     <FormField
                       control={form.control}
-                      name="isHazmat"
+                      name="is_hazmat"
                       render={({ field }) => (
                         <FormItem>
                           <FormControl>
@@ -771,11 +686,11 @@ export const SellMaterialsForm = ({
                     />
                   </div>
 
-                  {form.watch("isHazmat") && (
+                  {form.watch("is_hazmat") && (
                     <div className="flex-1 max-w-xs">
                       <FormField
                         control={form.control}
-                        name="hazmatCategory"
+                        name="hazmat_category"
                         render={({ field }) => (
                           <FormItem>
                             <FormControl>
