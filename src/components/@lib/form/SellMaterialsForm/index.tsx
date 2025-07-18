@@ -527,6 +527,7 @@ export const SellMaterialsForm = ({
                   <FormField
                     control={form.control}
                     name="address"
+                    rules={{ required: "Address is required" }}
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-gray-700">
@@ -560,7 +561,6 @@ export const SellMaterialsForm = ({
                             {...field}
                           />
                         </FormControl>
-                        <FormMessage />
                       </FormItem>
                     )}
                   />
@@ -570,6 +570,7 @@ export const SellMaterialsForm = ({
                   <FormField
                     control={form.control}
                     name="city"
+                    rules={{ required: "City is required" }}
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-gray-700">
@@ -590,6 +591,7 @@ export const SellMaterialsForm = ({
                   <FormField
                     control={form.control}
                     name="state"
+                    rules={{ required: "State is required" }}
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-gray-700">
@@ -610,6 +612,7 @@ export const SellMaterialsForm = ({
                   <FormField
                     control={form.control}
                     name="zip_code"
+                    rules={{ required: "Zip Code is required" }}
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-gray-700">
@@ -633,6 +636,7 @@ export const SellMaterialsForm = ({
                   <FormField
                     control={form.control}
                     name="country"
+                    rules={{ required: "Country is required" }}
                     render={({ field }) => (
                       <FormItem>
                         <FormLabel className="text-sm font-medium text-gray-700">
@@ -642,6 +646,27 @@ export const SellMaterialsForm = ({
                           <Input
                             variant="light"
                             placeholder="Country"
+                            className="h-12 text-base"
+                            {...field}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="phone_number"
+                    rules={{ required: "Phone Number is required" }}
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-sm font-medium text-gray-700">
+                          Phone Number
+                        </FormLabel>
+                        <FormControl>
+                          <Input
+                            variant="light"
+                            placeholder="Phone number"
                             className="h-12 text-base"
                             {...field}
                           />

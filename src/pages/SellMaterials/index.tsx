@@ -2,21 +2,34 @@ import {
   SellMaterialsForm,
   SellMaterialsFormValues,
 } from "@/components/@lib/form";
+import { useSellMaterials } from "@/hooks/mutations";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const SellMaterials = () => {
-  const handleSubmit = (data: SellMaterialsFormValues) => {
-    // handle form submission
-    console.log(data);
+  const navigate = useNavigate();
+  const { sellMaterials, isPending } = useSellMaterials();
+
+  const handleSubmit = async (data: SellMaterialsFormValues) => {
+    try {
+      await sellMaterials(data);
+      // Redirect to materials page or dashboard after successful submission
+      toast.success("Material listing created successfully!");
+      navigate("/materials");
+    } catch (error) {
+      // Error is already handled by the mutation hook
+      console.error("Failed to create material listing:", error);
+    }
   };
 
   const handleCancel = () => {
-    // handle cancel action
-    console.log("Form cancelled");
+    // Navigate back to materials page
+    navigate("/materials");
   };
 
   const handleBack = () => {
-    // handle back action
-    console.log("Back button clicked");
+    // Navigate back to previous page
+    navigate(-1);
   };
 
   return (
@@ -25,7 +38,7 @@ const SellMaterials = () => {
       onCancel={handleCancel}
       onBack={handleBack}
       title="Create Material Listing"
-      submitButtonText="Create Listing"
+      submitButtonText={isPending ? "Creating..." : "Create Listing"}
       cancelButtonText="Cancel"
     />
   );
